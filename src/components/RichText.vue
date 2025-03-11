@@ -1,10 +1,12 @@
 <template>
-  <vue3-tinymce v-model="content" :setting="setting" script-src="/fusion/tinymce/tinymce.min.js" />
+  <!-- <vue3-tinymce v-model="content" :setting="setting" script-src="/fusion/tinymce/tinymce.min.js" /> -->
+  <vue3-tinymce v-model="content" :setting="setting" script-src="/tinymce/tinymce.min.js" />
 </template>
   
   <script setup>
 import { watch, ref } from 'vue'
-import { server_url, utils_upload_img_url } from '../constants/constants'
+// import { server_url, utils_upload_img_url } from '../constants/constants'
+import { utils_upload_img_url } from '../constants/constants'
 // 引入组件
 import Vue3Tinymce from '@jsdawn/vue3-tinymce'
 import { useStore } from 'vuex'
@@ -31,8 +33,8 @@ const setting = {
   nonbreaking_force_tab: true,
   // 自定义 图片上传模式
   custom_images_upload: true,
-  images_upload_url: `${server_url}${utils_upload_img_url}`,
-  // images_upload_url: `http://localhost:8888${utils_upload_img_url}`,
+  // images_upload_url: `${server_url}${utils_upload_img_url}`,
+  images_upload_url: `http://localhost:8888${utils_upload_img_url}`,
 
   custom_images_upload_callback: (resp) => {
     return resp.image_url
@@ -44,7 +46,8 @@ const setting = {
 
   // 以中文简体为例
   language: 'zh-Hans',
-  language_url: '/fusion/tinymce/langs/zh-Hans.js'
+  // language_url: '/fusion/tinymce/langs/zh-Hans.js'
+  language_url: '/tinymce/langs/zh-Hans.js'
 }
 
 const content = ref('')

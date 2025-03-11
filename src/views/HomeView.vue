@@ -7,7 +7,7 @@
     <div class="flex mx-auto mt-8 justify-center">
       <!-- Left Side - Filters -->
       <div
-        class="sm:h-[85vh] sm:overflow-y-scroll min-w-[500px] flex flex-col content-cen w-80 bg-white p-4 rounded shadow shadow-xl"
+        class="sm:h-[85vh] sm:overflow-y-scroll min-w-[500px] flex flex-col content-cen w-80 bg-white p-4 rounded shadow-xl"
         style="min-width: 300px"
       >
         <div class="block mt-3 mb-3 pb-3 h-10 border-b border-b-slate-200">
