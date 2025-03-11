@@ -1,103 +1,151 @@
 <template>
-  <NavBar />
-  <section>
-    <div class="min-h-screen min-w-[1400px] w-full bg-gradient-to-b from-blue-400 to-transparent">
-      <div class="mx-auto min-w-[980px] w-2/3 flex justify-between pt-10">
-        <div
-          class="justify-start h-32 rounded-lg col-span-2 pl-14 text-4xl font-blod text-white flex items-center"
-        >
-          您的档案
-        </div>
-        <div class="justify-end h-32 pr-14 rounded-lg flex items-center">
-          <router-link
-            v-if="isCurrentUser"
-            class="inline-block rounded border border-current px-10 py-3 text-2xl font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
-            :to="{ name: 'userprofileupload' }"
+  <div>
+    <NavBar />
+    <section>
+      <div class="min-h-screen min-w-[1400px] w-full bg-gradient-to-b from-blue-400 to-transparent">
+        <div class="mx-auto min-w-[980px] w-2/3 flex justify-between pt-10">
+          <div
+            class="justify-start h-32 rounded-lg col-span-2 pl-14 text-4xl font-blod text-white flex items-center"
           >
-            编辑
-          </router-link>
+            您的档案
+          </div>
+          <div class="justify-end h-32 pr-14 rounded-lg flex items-center">
+            <router-link
+              v-if="isCurrentUser"
+              class="inline-block rounded border border-current px-10 py-3 text-2xl font-medium text-white transition hover:scale-110 hover:shadow-xl focus:outline-none focus:ring active:text-indigo-500"
+              :to="{ name: 'userprofileupload' }"
+            >
+              编辑
+            </router-link>
+          </div>
         </div>
-      </div>
 
-      <div class="mx-auto min-w-[980px] pt-10 px-20 rounded-lg bg-white w-2/3 h-4/5 shadow-xl">
-        <h1 class="text-2xl font-bold border-b-2 border-gray-30 inline-block pt-10">基础信息</h1>
-        <!-- Resume content -->
-        <div class="grid grid-cols-3 gap-2">
-          <div>
-            <p class="infotemplate pt-5">真实姓名</p>
-            <p class="mt-2">{{ user_profile_info.user_info.realname }}</p>
-            <p class="infotemplate pt-5">入学年份</p>
-            <p class="mt-2">{{ user_profile_info.user_info.enrollment_year }} 级</p>
-            <p class="infotemplate pt-5">所属学院</p>
-            <p class="mt-2">{{ user_profile_info.user_info.college }}</p>
-            <p class="infotemplate pt-5">手机号码</p>
-            <p class="mt-2">{{ user_profile_info.user_info.mobile_phone }}</p>
-          </div>
+        <div class="mx-auto min-w-[980px] pt-10 px-20 rounded-lg bg-white w-2/3 h-4/5 shadow-xl">
+          <h1 class="text-2xl font-bold border-b-2 border-gray-30 inline-block pt-10">基础信息</h1>
+          <!-- Resume content -->
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <p class="infotemplate pt-5">真实姓名</p>
+              <p class="mt-2">{{ user_profile_info.user_info.realname }}</p>
+              <p class="infotemplate pt-5">入学年份</p>
+              <p class="mt-2">{{ user_profile_info.user_info.enrollment_year }} 级</p>
+              <p class="infotemplate pt-5">所属学院</p>
+              <p class="mt-2">{{ user_profile_info.user_info.college }}</p>
+              <p class="infotemplate pt-5">手机号码</p>
+              <p class="mt-2">{{ user_profile_info.user_info.mobile_phone }}</p>
+            </div>
 
-          <div class="">
-            <p class="infotemplate pt-5">性别</p>
-            <p v-if="user_profile_info.user_info.gender == 1" class="mt-2">男</p>
-            <p v-else-if="user_profile_info.user_info.gender == 2" class="mt-2">女</p>
-            <p v-else class="mt-2">未知</p>
-            <p class="infotemplate pt-5">QQ号码</p>
-            <p class="mt-2">{{ user_profile_info.qq_number }}</p>
-            <p class="infotemplate pt-5">微信号码</p>
-            <p class="mt-2">{{ user_profile_info.wechat_number }}</p>
-          </div>
+            <div class="">
+              <p class="infotemplate pt-5">性别</p>
+              <p v-if="user_profile_info.user_info.gender == 1" class="mt-2">男</p>
+              <p v-else-if="user_profile_info.user_info.gender == 2" class="mt-2">女</p>
+              <p v-else class="mt-2">未知</p>
+              <p class="infotemplate pt-5">QQ号码</p>
+              <p class="mt-2">{{ user_profile_info.qq_number }}</p>
+              <p class="infotemplate pt-5">微信号码</p>
+              <p class="mt-2">{{ user_profile_info.wechat_number }}</p>
+            </div>
 
-          <div class="text-center">
-            <!-- 仅当 isCurrentUser 为真时显示上传控件和悬浮效果 -->
-            <div v-if="isCurrentUser" class="relative">
-              <input type="file" id="avatarUpload" @change="avatarUpload" class="sr-only" />
-              <label for="avatarUpload" class="cursor-pointer">
+            <div class="text-center">
+              <!-- 仅当 isCurrentUser 为真时显示上传控件和悬浮效果 -->
+              <div v-if="isCurrentUser" class="relative">
+                <input type="file" id="avatarUpload" @change="avatarUpload" class="sr-only" />
+                <label for="avatarUpload" class="cursor-pointer">
+                  <img
+                    v-if="user_profile_info.user_info.avatar_url != ''"
+                    :src="user_profile_info.user_info.avatar_url"
+                    class="rounded-full w-[170px] h-[170px] object-cover transition-opacity"
+                  />
+                  <img
+                    v-else
+                    src="../assets/img/defaultAvatar.svg"
+                    class="rounded-full w-[170px] h-[170px] object-cover transition-opacity"
+                  />
+                  <div
+                    class="absolute inset-0 w-[170px] bg-black bg-opacity-0 flex items-center justify-center opacity-0 hover:bg-opacity-50 hover:opacity-100 transition-opacity"
+                  >
+                    <p class="text-white">点击上传头像</p>
+                  </div>
+                </label>
+              </div>
+
+              <!-- 当 isCurrentUser 为假时，仅显示图片 -->
+              <div v-else>
                 <img
-                  v-if="user_profile_info.user_info.avatar_url != ''"
+                  alt="Developer"
                   :src="user_profile_info.user_info.avatar_url"
-                  class="rounded-full w-[170px] h-[170px] object-cover transition-opacity"
+                  class="rounded-full max-w-[180px] object-cover"
                 />
-                <img
-                  v-else
-                  src="../assets/img/defaultAvatar.svg"
-                  class="rounded-full w-[170px] h-[170px] object-cover transition-opacity"
-                />
-                <div
-                  class="absolute inset-0 w-[170px] bg-black bg-opacity-0 flex items-center justify-center opacity-0 hover:bg-opacity-50 hover:opacity-100 transition-opacity"
-                >
-                  <p class="text-white">点击上传头像</p>
-                </div>
-              </label>
-            </div>
-
-            <!-- 当 isCurrentUser 为假时，仅显示图片 -->
-            <div v-else>
-              <img
-                alt="Developer"
-                :src="user_profile_info.user_info.avatar_url"
-                class="rounded-full max-w-[180px] object-cover"
-              />
+              </div>
             </div>
           </div>
-        </div>
 
-        <div>
-          <h1 class="text-2xl font-bold border-b-2 border-gray-30 inline-block pt-10">个人介绍</h1>
-          <p class="pt-5">{{ user_profile_info.introduction }}</p>
-        </div>
-        <div class="pb-20">
-          <h1 class="text-2xl font-bold border-b-2 border-gray-30 inline-block pt-10">荣誉列表</h1>
-          <li
-            v-for="(honor, index) in user_profile_info.honors"
-            :key="index"
-            class="mt-2 text-base leading-6 text-gray-800 flex items-center"
-          >
-            <img src="../assets/img/honor.svg" alt="goal" class="h-6 w-6 mr-3" />
-            <span class="pt-1">{{ honor }}</span>
-          </li>
+          <div>
+            <h1 class="text-2xl font-bold border-b-2 border-gray-30 inline-block pt-10">
+              个人介绍
+            </h1>
+            <p class="pt-5">{{ user_profile_info.introduction }}</p>
+          </div>
+
+          <div>
+            <h1 class="text-2xl font-bold border-b-2 border-gray-30 inline-block pt-10">
+              技能列表
+            </h1>
+
+            <!-- 分类技能展示 -->
+            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div
+                v-for="(skills, category) in groupedSkills"
+                :key="category"
+                class="bg-gray-50 rounded-lg p-4 shadow-sm"
+              >
+                <h3
+                  class="text-lg font-semibold text-indigo-700 mb-3 border-b border-indigo-200 pb-2"
+                >
+                  {{ category }}
+                </h3>
+                <div v-for="skill in skills" :key="skill.skill" class="mb-3">
+                  <div class="flex justify-between items-center mb-1">
+                    <span class="text-gray-800 font-medium">{{ skill.skill }}</span>
+                    <span class="text-sm text-indigo-600 font-medium">{{ skill.proficiency }}</span>
+                  </div>
+                  <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div
+                      class="bg-indigo-600 h-2 rounded-full"
+                      :style="{ width: getProficiencyWidth(skill.proficiency) }"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 如果没有技能，显示提示信息 -->
+            <div
+              v-if="!user_profile_info.user_skills || user_profile_info.user_skills.length === 0"
+              class="mt-4 text-gray-500 italic"
+            >
+              暂无技能信息
+            </div>
+          </div>
+
+          <div class="pb-20">
+            <h1 class="text-2xl font-bold border-b-2 border-gray-30 inline-block pt-10">
+              荣誉列表
+            </h1>
+            <li
+              v-for="(honor, index) in user_profile_info.honors"
+              :key="index"
+              class="mt-2 text-base leading-6 text-gray-800 flex items-center"
+            >
+              <img src="../assets/img/honor.svg" alt="goal" class="h-6 w-6 mr-3" />
+              <span class="pt-1">{{ honor }}</span>
+            </li>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-  <div class="mb-20"></div>
+    </section>
+    <div class="mb-20"></div>
+  </div>
 </template>
 <script>
 import { useRouter } from 'vue-router'
@@ -129,6 +177,7 @@ export default {
       qq_number: '',
       wechat_number: '',
       honors: [''],
+      user_skills: [],
       user_info: {
         user_id: 0,
         gender: 0,
@@ -249,6 +298,33 @@ export default {
       return user_profile_info.user_info.user_id === store.state.user.user_info.user_id
     })
 
+    const groupedSkills = computed(() => {
+      const skills = user_profile_info.user_skills
+      const grouped = {}
+      skills.forEach((skill) => {
+        if (!grouped[skill.category]) {
+          grouped[skill.category] = []
+        }
+        grouped[skill.category].push(skill)
+      })
+      return grouped
+    })
+
+    const getProficiencyWidth = (proficiency) => {
+      switch (proficiency) {
+        case '一般':
+          return '25%'
+        case '良好':
+          return '50%'
+        case '熟练':
+          return '75%'
+        case '精通':
+          return '100%'
+        default:
+          return '0%'
+      }
+    }
+
     return {
       user_profile_info,
       getUserProfileInfo,
@@ -261,8 +337,9 @@ export default {
       web_user_profile_upload_relative_url,
       isCurrentUser,
       updateAvatarUrl,
-      utils_upload_img_url
-      //token
+      utils_upload_img_url,
+      groupedSkills,
+      getProficiencyWidth
     }
   }
 }
