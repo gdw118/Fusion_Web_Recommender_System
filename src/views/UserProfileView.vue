@@ -1,59 +1,57 @@
 <template>
-  <div>
+  <div
+    class="min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 relative overflow-hidden"
+  >
     <NavBar />
-    <section class="relative">
-      <!-- 背景装饰元素 -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          class="absolute top-20 left-10 w-64 h-64 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"
-        ></div>
-        <div
-          class="absolute top-40 right-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"
-        ></div>
-        <div
-          class="absolute bottom-40 left-1/4 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"
-        ></div>
-        <div
-          class="absolute -bottom-20 right-1/3 w-60 h-60 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"
-        ></div>
-      </div>
 
+    <!-- 背景装饰元素 -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
       <div
-        class="min-h-screen min-w-[1400px] w-full bg-gradient-to-b from-blue-400 to-transparent relative"
-      >
-        <!-- 顶部装饰图案 -->
-        <div
-          class="absolute top-0 inset-x-0 h-40 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSIyMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdGggZD0iTTAgMGgxNDQwdjE4OGMtMzYuOCAyMS4zLTgxLjcgMzItMTM0LjcgMzJDMTE3NC45IDIyMCAxMDU3IDEzMCA5MTkgMTMwYy0xMzguMSAwLTI1NS45IDkwLTM2Ni45IDkwLTExMSAwLTIzMC45LTkwLTM2OS45LTkwLTEzOC4xIDAtMTgyLjEgOTAtMTgyLjEgOTBWMHoiIGlkPSJhIi8+PC9kZWZzPjx1c2UgZmlsbD0iI2VmZjZmZiIgZmlsbC1vcGFjaXR5PSIuNSIgeGxpbms6aHJlZj0iI2EiIHRyYW5zZm9ybT0icm90YXRlKDE4MCAxNDQwIDExMCkiLz48L3N2Zz4=')]"
-        ></div>
+        class="absolute top-20 left-10 w-64 h-64 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"
+      ></div>
+      <div
+        class="absolute top-40 right-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"
+      ></div>
+      <div
+        class="absolute bottom-40 left-1/4 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"
+      ></div>
+      <div
+        class="absolute -bottom-20 right-1/3 w-60 h-60 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"
+      ></div>
+    </div>
 
-        <div class="mx-auto min-w-[980px] w-2/3 flex justify-between pt-10 relative z-10">
-          <div
-            class="justify-start h-32 rounded-lg col-span-2 pl-14 text-4xl font-bold text-white flex items-center"
-          >
-            个人档案
-            <div
-              class="ml-4 w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+    <section class="relative py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-6xl mx-auto">
+        <!-- 顶部信息栏 -->
+        <div
+          class="backdrop-blur-lg bg-gradient-to-r from-blue-500/80 to-indigo-600/80 rounded-2xl shadow-2xl mb-10 overflow-hidden border border-white/20"
+        >
+          <div class="flex flex-col md:flex-row items-center justify-between p-8">
+            <div class="flex items-center mb-6 md:mb-0">
+              <div
+                class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mr-6 shadow-inner"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                />
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-8 w-8 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+              </div>
+              <h1 class="text-4xl font-bold text-white">个人档案</h1>
             </div>
-          </div>
-          <div class="justify-end h-32 pr-14 rounded-lg flex items-center">
+
             <router-link
               v-if="isCurrentUser"
-              class="inline-flex items-center rounded-md border border-white px-6 py-3 text-lg font-medium text-white transition hover:bg-white hover:bg-opacity-10 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+              class="inline-flex items-center rounded-xl border border-white/30 px-6 py-3 text-lg font-medium text-white transition-all duration-300 hover:bg-white/20 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white/50 backdrop-blur-sm transform hover:scale-105"
               :to="{ name: 'userprofileupload' }"
             >
               <svg
@@ -73,120 +71,197 @@
               编辑档案
             </router-link>
           </div>
+
+          <!-- 波浪装饰 -->
+          <div
+            class="h-12 bg-gradient-to-r from-blue-400/30 to-indigo-500/30 relative overflow-hidden"
+          >
+            <svg
+              class="absolute bottom-0 w-full h-12"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1440 320"
+            >
+              <path
+                fill="#ffffff"
+                fill-opacity="0.2"
+                d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,202.7C672,203,768,181,864,181.3C960,181,1056,203,1152,208C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+              ></path>
+            </svg>
+          </div>
         </div>
 
+        <!-- 主要内容区域 -->
         <div
-          class="mx-auto min-w-[980px] pt-10 px-20 rounded-lg bg-white w-2/3 shadow-xl mb-20 relative"
+          class="backdrop-blur-lg bg-white/70 rounded-2xl shadow-xl overflow-hidden border border-white/50 relative"
         >
           <!-- 卡片右上角装饰 -->
           <div class="absolute top-0 right-0 w-32 h-32 overflow-hidden">
             <div
-              class="absolute top-0 right-0 w-16 h-16 bg-indigo-100 transform rotate-45 translate-x-8 -translate-y-8"
+              class="absolute top-0 right-0 w-16 h-16 bg-indigo-100/70 transform rotate-45 translate-x-8 -translate-y-8"
             ></div>
           </div>
 
           <!-- 基本信息部分 -->
-          <div class="border-b border-gray-200 pb-8 relative">
-            <h1
-              class="text-2xl font-bold text-gray-800 inline-block pt-10 mb-6 border-b-2 border-indigo-500 pb-1 items-center"
+          <div class="border-b border-gray-200/50 p-8 relative">
+            <h2
+              class="text-2xl font-bold text-indigo-700 inline-block mb-8 border-b-2 border-indigo-500 pb-1 flex items-center"
             >
-              <span class="w-2 h-8 bg-indigo-500 rounded-sm mr-3"></span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
               基础信息
-            </h1>
+            </h2>
 
-            <div class="grid grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <!-- 左侧信息 -->
               <div class="space-y-6">
-                <div>
-                  <p class="infotemplate">真实姓名</p>
-                  <p class="mt-1 text-lg font-medium text-gray-800">
+                <div class="group">
+                  <p class="text-sm font-medium text-indigo-600 mb-1 flex items-center">
+                    <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2"></span>
+                    真实姓名
+                  </p>
+                  <p
+                    class="mt-1 text-lg font-medium text-gray-800 pl-3.5 group-hover:text-indigo-700 transition-colors"
+                  >
                     {{ user_profile_info.user_info.realname || '未设置' }}
                   </p>
                 </div>
-                <div>
-                  <p class="infotemplate">入学年份</p>
-                  <p class="mt-1 text-lg font-medium text-gray-800">
+                <div class="group">
+                  <p class="text-sm font-medium text-indigo-600 mb-1 flex items-center">
+                    <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2"></span>
+                    入学年份
+                  </p>
+                  <p
+                    class="mt-1 text-lg font-medium text-gray-800 pl-3.5 group-hover:text-indigo-700 transition-colors"
+                  >
                     {{ user_profile_info.user_info.enrollment_year || '未设置' }} 级
                   </p>
                 </div>
-                <div>
-                  <p class="infotemplate">所属学院</p>
-                  <p class="mt-1 text-lg font-medium text-gray-800">
+                <div class="group">
+                  <p class="text-sm font-medium text-indigo-600 mb-1 flex items-center">
+                    <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2"></span>
+                    所属学院
+                  </p>
+                  <p
+                    class="mt-1 text-lg font-medium text-gray-800 pl-3.5 group-hover:text-indigo-700 transition-colors"
+                  >
                     {{ user_profile_info.user_info.college || '未设置' }}
                   </p>
                 </div>
-                <div>
-                  <p class="infotemplate">手机号码</p>
-                  <p class="mt-1 text-lg font-medium text-gray-800">
+                <div class="group">
+                  <p class="text-sm font-medium text-indigo-600 mb-1 flex items-center">
+                    <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2"></span>
+                    手机号码
+                  </p>
+                  <p
+                    class="mt-1 text-lg font-medium text-gray-800 pl-3.5 group-hover:text-indigo-700 transition-colors"
+                  >
                     {{ user_profile_info.user_info.mobile_phone || '未设置' }}
                   </p>
                 </div>
               </div>
 
+              <!-- 中间信息 -->
               <div class="space-y-6">
-                <div>
-                  <p class="infotemplate">性别</p>
+                <div class="group">
+                  <p class="text-sm font-medium text-indigo-600 mb-1 flex items-center">
+                    <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2"></span>
+                    性别
+                  </p>
                   <p
                     v-if="user_profile_info.user_info.gender == 1"
-                    class="mt-1 text-lg font-medium text-gray-800"
+                    class="mt-1 text-lg font-medium text-gray-800 pl-3.5 group-hover:text-indigo-700 transition-colors"
                   >
                     男
                   </p>
                   <p
                     v-else-if="user_profile_info.user_info.gender == 2"
-                    class="mt-1 text-lg font-medium text-gray-800"
+                    class="mt-1 text-lg font-medium text-gray-800 pl-3.5 group-hover:text-indigo-700 transition-colors"
                   >
                     女
                   </p>
-                  <p v-else class="mt-1 text-lg font-medium text-gray-800">未设置</p>
+                  <p
+                    v-else
+                    class="mt-1 text-lg font-medium text-gray-800 pl-3.5 group-hover:text-indigo-700 transition-colors"
+                  >
+                    未设置
+                  </p>
                 </div>
-                <div>
-                  <p class="infotemplate">QQ号码</p>
-                  <p class="mt-1 text-lg font-medium text-gray-800">
+                <div class="group">
+                  <p class="text-sm font-medium text-indigo-600 mb-1 flex items-center">
+                    <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2"></span>
+                    QQ号码
+                  </p>
+                  <p
+                    class="mt-1 text-lg font-medium text-gray-800 pl-3.5 group-hover:text-indigo-700 transition-colors"
+                  >
                     {{ user_profile_info.qq_number || '未设置' }}
                   </p>
                 </div>
-                <div>
-                  <p class="infotemplate">微信号码</p>
-                  <p class="mt-1 text-lg font-medium text-gray-800">
+                <div class="group">
+                  <p class="text-sm font-medium text-indigo-600 mb-1 flex items-center">
+                    <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2"></span>
+                    微信号码
+                  </p>
+                  <p
+                    class="mt-1 text-lg font-medium text-gray-800 pl-3.5 group-hover:text-indigo-700 transition-colors"
+                  >
                     {{ user_profile_info.wechat_number || '未设置' }}
                   </p>
                 </div>
               </div>
 
-              <div class="text-center">
+              <!-- 右侧头像 -->
+              <div class="flex flex-col items-center justify-center">
                 <!-- 头像部分 -->
                 <div v-if="isCurrentUser" class="relative">
                   <input type="file" id="avatarUpload" @change="avatarUpload" class="sr-only" />
                   <label for="avatarUpload" class="cursor-pointer">
                     <div
-                      class="relative w-[170px] h-[170px] mx-auto rounded-full overflow-hidden border-4 border-white shadow-lg"
+                      class="relative w-[180px] h-[180px] mx-auto rounded-full overflow-hidden border-4 border-white shadow-lg group"
                     >
                       <img
                         v-if="user_profile_info.user_info.avatar_url"
                         :src="user_profile_info.user_info.avatar_url"
-                        class="w-full h-full object-cover"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                       <img
                         v-else
                         src="../assets/img/defaultAvatar.svg"
-                        class="w-full h-full object-cover bg-gray-100"
+                        class="w-full h-full object-cover bg-gray-100 transition-transform duration-500 group-hover:scale-110"
                       />
                       <div
-                        class="absolute inset-0 bg-black bg-opacity-0 flex items-center justify-center opacity-0 hover:bg-opacity-50 hover:opacity-100 transition-opacity"
+                        class="absolute inset-0 bg-gradient-to-t from-indigo-900/70 to-transparent flex items-end justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       >
-                        <p class="text-white font-medium">点击上传头像</p>
+                        <p class="text-white font-medium pb-4">点击上传头像</p>
                       </div>
                     </div>
                   </label>
-                  <p class="mt-3 text-gray-600 font-medium">
-                    {{ user_profile_info.user_info.nickname || '未设置昵称' }}
-                  </p>
+                  <div class="mt-4 text-center">
+                    <p class="text-xl font-semibold text-indigo-700">
+                      {{ user_profile_info.user_info.nickname || '未设置昵称' }}
+                    </p>
+                    <p class="text-sm text-gray-500 mt-1">
+                      {{ user_profile_info.user_info.username }}
+                    </p>
+                  </div>
                 </div>
 
                 <!-- 当不是当前用户时，仅显示图片 -->
                 <div v-else>
                   <div
-                    class="w-[170px] h-[170px] mx-auto rounded-full overflow-hidden border-4 border-white shadow-lg"
+                    class="relative w-[180px] h-[180px] mx-auto rounded-full overflow-hidden border-4 border-white shadow-lg"
                   >
                     <img
                       :src="
@@ -195,102 +270,64 @@
                       class="w-full h-full object-cover"
                       alt="用户头像"
                     />
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-indigo-900/30 to-transparent"
+                    ></div>
                   </div>
-                  <p class="mt-3 text-gray-600 font-medium">
-                    {{ user_profile_info.user_info.nickname || '未设置昵称' }}
-                  </p>
+                  <div class="mt-4 text-center">
+                    <p class="text-xl font-semibold text-indigo-700">
+                      {{ user_profile_info.user_info.nickname || '未设置昵称' }}
+                    </p>
+                    <p class="text-sm text-gray-500 mt-1">
+                      {{ user_profile_info.user_info.username }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- 个人介绍部分 -->
-          <div class="py-8 border-b border-gray-200 relative">
-            <h1
-              class="text-2xl font-bold text-gray-800 inline-block mb-6 border-b-2 border-indigo-500 pb-1 items-center"
+          <div
+            class="p-8 border-b border-gray-200/50 bg-gradient-to-r from-blue-50/50 to-indigo-50/50"
+          >
+            <h2
+              class="text-2xl font-bold text-indigo-700 inline-block mb-6 border-b-2 border-indigo-500 pb-1 flex items-center"
             >
-              <span class="w-2 h-8 bg-indigo-500 rounded-sm mr-3"></span>
-              个人介绍
-            </h1>
-            <div class="bg-gray-50 rounded-lg p-6 shadow-sm relative">
-              <!-- 装饰引号 -->
-              <div
-                class="absolute -top-3 -left-3 w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 text-indigo-500"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
-                  />
-                </svg>
-              </div>
-              <p class="text-gray-700 leading-relaxed">
-                {{ user_profile_info.introduction || '暂无个人介绍' }}
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                />
+              </svg>
+              个人介绍
+            </h2>
+
+            <div
+              class="backdrop-blur-sm bg-white/50 rounded-xl p-6 shadow-inner border border-white/80"
+            >
+              <p class="text-gray-700 leading-relaxed whitespace-pre-line">
+                {{ user_profile_info.introduction || '该用户暂未填写个人介绍' }}
               </p>
             </div>
           </div>
 
           <!-- 技能列表部分 -->
-          <div class="py-8 border-b border-gray-200 relative">
-            <h1
-              class="text-2xl font-bold text-gray-800 inline-block mb-6 border-b-2 border-indigo-500 pb-1 items-center"
+          <div class="p-8 border-b border-gray-200/50">
+            <h2
+              class="text-2xl font-bold text-indigo-700 inline-block mb-6 border-b-2 border-indigo-500 pb-1 flex items-center"
             >
-              <span class="w-2 h-8 bg-indigo-500 rounded-sm mr-3"></span>
-              技能列表
-            </h1>
-
-            <!-- 分类技能展示 -->
-            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div
-                v-for="(skills, category) in groupedSkills"
-                :key="category"
-                class="bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden"
-              >
-                <!-- 卡片装饰 -->
-                <div
-                  class="absolute -top-4 -right-4 w-16 h-16 bg-indigo-100 rounded-full opacity-50"
-                ></div>
-
-                <h3
-                  class="text-lg font-semibold text-indigo-700 mb-4 border-b border-indigo-200 pb-2 flex items-center relative z-10"
-                >
-                  <span class="w-2 h-2 bg-indigo-500 rounded-full mr-2"></span>
-                  {{ category }}
-                </h3>
-                <div v-for="skill in skills" :key="skill.skill" class="mb-4 relative z-10">
-                  <div class="flex justify-between items-center mb-2">
-                    <span class="text-gray-800 font-medium">{{ skill.skill }}</span>
-                    <span class="text-sm bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full">{{
-                      skill.proficiency
-                    }}</span>
-                  </div>
-                  <div class="w-full bg-gray-200 rounded-full h-2.5">
-                    <div
-                      class="bg-indigo-600 h-2.5 rounded-full transition-all duration-500"
-                      :style="{ width: getProficiencyWidth(skill.proficiency) }"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- 如果没有技能，显示提示信息 -->
-            <div
-              v-if="!user_profile_info.user_skills || user_profile_info.user_skills.length === 0"
-              class="mt-4 bg-gray-50 rounded-lg p-8 text-center relative overflow-hidden"
-            >
-              <!-- 装饰元素 -->
-              <div
-                class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-300 via-blue-300 to-purple-300"
-              ></div>
-
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-12 w-12 mx-auto text-gray-400 mb-3"
+                class="h-6 w-6 mr-2"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -302,75 +339,151 @@
                   d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
                 />
               </svg>
-              <p class="text-gray-500 italic">暂无技能信息</p>
-              <p v-if="isCurrentUser" class="text-sm text-gray-500 mt-2">
-                点击"编辑档案"添加您的技能
-              </p>
+              技能列表
+            </h2>
+
+            <div
+              v-if="Object.keys(groupedSkills).length > 0"
+              class="grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
+              <div
+                v-for="(skills, category) in groupedSkills"
+                :key="category"
+                class="backdrop-blur-md bg-gradient-to-br from-white/60 to-indigo-50/60 rounded-xl p-5 border border-white/50 shadow-lg"
+              >
+                <h3
+                  class="text-lg font-semibold text-indigo-700 mb-4 pb-2 border-b border-indigo-100 flex items-center"
+                >
+                  <span class="w-2 h-2 bg-indigo-500 rounded-full mr-2"></span>
+                  {{ category }}
+                </h3>
+                <div class="grid grid-cols-1 gap-3">
+                  <div
+                    v-for="skill in skills"
+                    :key="skill.skill"
+                    class="flex items-center justify-between bg-white/70 backdrop-blur-sm rounded-lg p-3 shadow-sm hover:shadow-md transition-all duration-300 border border-indigo-100/50"
+                  >
+                    <div class="flex items-center">
+                      <div class="w-2 h-2 rounded-full bg-indigo-500 mr-2"></div>
+                      <span class="text-gray-800">{{ skill.skill }}</span>
+                    </div>
+                    <span class="text-xs bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full">
+                      {{ skill.proficiency }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 如果没有技能，显示提示信息 -->
+            <div
+              v-if="!user_profile_info.user_skills || user_profile_info.user_skills.length === 0"
+              class="backdrop-blur-md bg-white/40 rounded-xl p-8 text-center border border-dashed border-indigo-200 shadow-inner"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-12 w-12 mx-auto text-indigo-300 mb-3"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                />
+              </svg>
+              <p class="text-indigo-500 font-medium">暂无技能信息</p>
             </div>
           </div>
 
           <!-- 荣誉列表部分 -->
-          <div class="py-8 pb-16 relative">
-            <h1
-              class="text-2xl font-bold text-gray-800 inline-block mb-6 border-b-2 border-indigo-500 pb-1 items-center"
+          <div class="p-8 bg-gradient-to-r from-indigo-50/50 to-blue-50/50">
+            <h2
+              class="text-2xl font-bold text-indigo-700 inline-block mb-6 border-b-2 border-indigo-500 pb-1 flex items-center"
             >
-              <span class="w-2 h-8 bg-indigo-500 rounded-sm mr-3"></span>
-              荣誉列表
-            </h1>
-
-            <div class="bg-gray-50 rounded-lg p-6 shadow-sm relative overflow-hidden">
-              <!-- 装饰元素 -->
-              <div
-                class="absolute -bottom-8 -right-8 w-24 h-24 bg-indigo-100 rounded-full opacity-50"
-              ></div>
-              <div
-                class="absolute top-0 right-0 w-20 h-1 bg-gradient-to-l from-indigo-300 to-transparent"
-              ></div>
-
-              <ul class="space-y-3 relative z-10">
-                <li
-                  v-for="(honor, index) in user_profile_info.honors"
-                  :key="index"
-                  class="flex items-center text-gray-700"
-                  v-show="honor && honor.trim()"
-                >
-                  <div
-                    class="flex-shrink-0 w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center mr-3"
-                  >
-                    <img src="../assets/img/honor.svg" alt="荣誉" class="h-5 w-5" />
-                  </div>
-                  <span class="font-medium">{{ honor }}</span>
-                </li>
-              </ul>
-
-              <!-- 如果没有荣誉，显示提示信息 -->
-              <div
-                v-if="
-                  !user_profile_info.honors ||
-                  user_profile_info.honors.length === 0 ||
-                  (user_profile_info.honors.length === 1 && !user_profile_info.honors[0])
-                "
-                class="text-center py-6 relative z-10"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-12 w-12 mx-auto text-gray-400 mb-3"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                  />
-                </svg>
-                <p class="text-gray-500 italic">暂无荣誉信息</p>
-                <p v-if="isCurrentUser" class="text-sm text-gray-500 mt-2">
-                  点击"编辑档案"添加您的荣誉
-                </p>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                />
+              </svg>
+              荣誉列表
+            </h2>
+
+            <div
+              v-if="
+                user_profile_info.honors &&
+                user_profile_info.honors.length > 0 &&
+                user_profile_info.honors[0]
+              "
+              class="grid grid-cols-1 gap-4"
+            >
+              <div
+                v-for="(honor, index) in user_profile_info.honors"
+                :key="index"
+                v-show="honor && honor.trim()"
+                class="backdrop-blur-md bg-white/60 rounded-xl p-5 border border-white/50 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              >
+                <div class="flex items-start">
+                  <div
+                    class="flex-shrink-0 w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mr-4"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-6 w-6 text-indigo-600"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                      />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-semibold text-indigo-700">{{ honor }}</h3>
+                  </div>
+                </div>
               </div>
+            </div>
+
+            <!-- 如果没有荣誉，显示提示信息 -->
+            <div
+              v-if="
+                !user_profile_info.honors ||
+                user_profile_info.honors.length === 0 ||
+                (user_profile_info.honors.length === 1 && !user_profile_info.honors[0])
+              "
+              class="backdrop-blur-md bg-white/40 rounded-xl p-8 text-center border border-dashed border-indigo-200 shadow-inner"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-12 w-12 mx-auto text-indigo-300 mb-3"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                />
+              </svg>
+              <p class="text-indigo-500 font-medium">暂无荣誉信息</p>
             </div>
           </div>
         </div>
@@ -378,6 +491,7 @@
     </section>
   </div>
 </template>
+
 <script>
 import { useRouter } from 'vue-router'
 import { useRoute } from 'vue-router'
@@ -577,12 +691,6 @@ export default {
 </script>
 
 <style scoped>
-.infotemplate {
-  color: gray;
-  font-size: 15px;
-}
-
-/* 动画效果 */
 @keyframes blob {
   0% {
     transform: translate(0px, 0px) scale(1);
@@ -608,5 +716,13 @@ export default {
 
 .animation-delay-4000 {
   animation-delay: 4s;
+}
+
+.infotemplate {
+  @apply text-sm font-medium text-indigo-600 mb-1 flex items-center;
+}
+.infotemplate::before {
+  content: '';
+  @apply w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2;
 }
 </style>
