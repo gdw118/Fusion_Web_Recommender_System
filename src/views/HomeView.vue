@@ -94,10 +94,12 @@
           <div class="form-control w-3/4 ml-2">
             <label
               class="label hover:cursor-pointer transition-transform transform active:scale-95"
-              @click="getMyFavorContest"
+              @click="toggleFavorView"
             >
-              <span class="label-text text-base font-medium">点击查看</span>
-              <img src="../assets/img/is_favor.svg" class="w-5 h-5" />
+              <span class="label-text text-base font-medium">{{
+                is_favor ? '取消查看' : '点击查看'
+              }}</span>
+              <img :src="is_favor ? favorIcons.cancelFavor : favorIcons.isFavor" class="w-5 h-5" />
             </label>
           </div>
         </span>
@@ -108,8 +110,8 @@
 
       <!-- Right Side - Event Blocks -->
       <div
-        class="sm:h-[85vh] min-w-[500px] flex flex-col w-1/2 bg-white p-4 rounded shadow-lg"
-        style="min-width: 700px"
+        class="sm:h-[85vh] flex flex-col bg-white p-4 rounded shadow-lg"
+        style="min-width: 700px; width: 50%; max-width: 900px"
       >
         <div class="block">
           <h3 v-if="!is_favor" class="float-left text-3xl ml-4 font-semibold mb-4">赛事板块 🚀</h3>
@@ -141,7 +143,6 @@
               {{ currentPage }}
               <span class="mx-1">/</span>
               {{ totalPage }}
-              <!-- Here, 12 can be a variable representing the total number of pages -->
             </p>
 
             <!-- Next Page Button -->
@@ -165,21 +166,40 @@
             </button>
           </div>
         </div>
-        <div class="sm:overflow-y-scroll">
-          <router-link
-            :to="{ name: 'contest', params: { contest_id: contest.contest_id } }"
-            v-for="contest in contests"
-            :key="'link-' + contest.contest_id"
-            class="block transition-transform transform active:scale-95"
-          >
-            <ContestCard
-              :title="contest.title"
-              :field="contest.field"
-              :format="contest.format"
-              :created_time="contest.created_time"
-              :description="contest.description"
-            ></ContestCard>
-          </router-link>
+        <div class="sm:overflow-y-scroll flex-grow">
+          <div v-if="contests.length > 0">
+            <router-link
+              :to="{ name: 'contest', params: { contest_id: contest.contest_id } }"
+              v-for="contest in contests"
+              :key="'link-' + contest.contest_id"
+              class="block transition-transform transform active:scale-95"
+            >
+              <ContestCard
+                :title="contest.title"
+                :field="contest.field"
+                :format="contest.format"
+                :created_time="contest.created_time"
+                :description="contest.description"
+              ></ContestCard>
+            </router-link>
+          </div>
+          <div v-else class="flex flex-col items-center justify-center min-h-[500px]">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-16 w-16 text-gray-400 mb-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <p class="text-xl text-gray-500 font-medium">暂无符合条件的赛事</p>
+          </div>
         </div>
       </div>
     </div>
@@ -198,6 +218,10 @@ import {
 } from '../constants/constants.js'
 import $ from 'jquery'
 import { useStore } from 'vuex'
+// 导入图标
+import isFavorIcon from '../assets/img/is_favor.svg'
+import cancelFavorIcon from '../assets/img/cancel_favor.svg'
+
 export default {
   components: {
     NavBar,
@@ -292,6 +316,12 @@ export default {
       team: '团队竞赛'
     }
 
+    // 添加图标引用
+    const favorIcons = {
+      isFavor: isFavorIcon,
+      cancelFavor: cancelFavorIcon
+    }
+
     // 计算属性，用于判断是否有至少一个复选框被选中
     const anyCheckboxSelected = computed(() => {
       return (
@@ -304,6 +334,10 @@ export default {
       fields.value.forEach((field) => (field.selected = false))
       competition_formats.value.forEach((format) => (format.selected = false))
       is_favor.value = false
+      // 重置页码
+      currentPage.value = 1
+      // 重新获取赛事列表
+      getContests()
     }
 
     // 按条件获取赛事板块
@@ -370,7 +404,13 @@ export default {
     // 监听触发
     watch(fields, getContests, { deep: true })
     watch(competition_formats, getContests, { deep: true })
-    watch(currentPage, getContests)
+    watch(currentPage, () => {
+      if (is_favor.value) {
+        getMyFavorContest()
+      } else {
+        getContests()
+      }
+    })
 
     const getMyFavorContest = () => {
       if (store.state.user.is_login == false) {
@@ -378,6 +418,9 @@ export default {
         return
       }
       is_favor.value = true
+      // 重置页码
+      currentPage.value = 1
+
       $.ajax({
         url: `${server_url}${favorite_contest_list_url}`,
         type: 'GET',
@@ -391,6 +434,12 @@ export default {
         },
         success: function (resp) {
           if (resp.status_code == 0) {
+            // 更新总页数
+            totalPage.value = Math.ceil(resp.total / limit)
+            if (totalPage.value == 0) {
+              totalPage.value = 1
+            }
+
             const fetched_contests = resp.contest_list.map((item) => {
               return {
                 contest_id: item.contest_brief_info.contest_id,
@@ -412,6 +461,18 @@ export default {
       })
     }
 
+    const toggleFavorView = () => {
+      if (is_favor.value) {
+        is_favor.value = false
+        // 重置页码
+        currentPage.value = 1
+        // 重新获取常规赛事列表
+        getContests()
+      } else {
+        getMyFavorContest()
+      }
+    }
+
     return {
       keyword,
       fields,
@@ -426,7 +487,9 @@ export default {
       prevPage,
       web_contest_url,
       getMyFavorContest,
-      is_favor
+      is_favor,
+      toggleFavorView,
+      favorIcons // 导出图标引用
     }
   }
 }
