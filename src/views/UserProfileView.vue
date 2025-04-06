@@ -171,7 +171,6 @@
                   </p>
                 </div>
               </div>
-
               <!-- 中间信息 -->
               <div class="space-y-6">
                 <div class="group">
@@ -724,5 +723,33 @@ export default {
 .infotemplate::before {
   content: '';
   @apply w-1.5 h-1.5 bg-indigo-500 rounded-full mr-2;
+}
+
+/* 动画效果 */
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
 }
 </style>
