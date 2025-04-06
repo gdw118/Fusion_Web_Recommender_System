@@ -385,6 +385,29 @@
             <img src="../assets/img/goal.svg" alt="goal" class="h-7 w-7 mr-3" />
             <span>目标：{{ team.team_brief_info.goal }}</span>
           </div>
+          <!-- 技能需求 -->
+          <div
+            v-if="team.team_skills && team.team_skills.length > 0"
+            class="text-lg font-semibold mt-5 ml-6"
+          >
+            <div class="flex items-center mb-3">
+              <img src="../assets/img/honor.svg" alt="skills" class="h-7 w-7 mr-3" />
+              <span>技能需求：</span>
+            </div>
+            <div class="ml-10 space-y-4">
+              <!-- 按岗位分组显示技能 -->
+              <div v-for="(skills, job) in groupSkillsByJob" :key="job" class="space-y-2">
+                <div class="font-medium text-indigo-600">{{ job }}</div>
+                <div class="flex flex-wrap gap-2">
+                  <div v-for="skill in skills" :key="skill.skill" class="flex items-center">
+                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">
+                      {{ skill.skill }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="px-6 max-w-[700px]">
           <span class="rich-text" v-html="team.description"></span>
@@ -421,7 +444,7 @@
 </template>
     
 <script setup>
-import { ref, reactive, watch } from 'vue'
+import { ref, reactive, watch, computed } from 'vue'
 import NavBar from '../components/NavBar.vue'
 import TeamCreate from '../components/TeamCreate.vue'
 import $ from 'jquery'
@@ -473,7 +496,8 @@ const team = reactive({
       enrollment_year: 0,
       honors: ['']
     }
-  }
+  },
+  team_skills: []
 })
 
 const formattedCreatedTime = (created_time) => {
@@ -509,6 +533,10 @@ const get_team_info = () => {
           }
         }
         Object.assign(team, resp.team_info)
+        // 确保 team_skills 被正确赋值
+        if (resp.team_info.team_skills) {
+          team.team_skills = resp.team_info.team_skills
+        }
       }
     }
   })
@@ -520,7 +548,8 @@ const cur_team_info = reactive({
   contest_id: team.team_brief_info.contest_id,
   title: team.team_brief_info.title,
   goal: team.team_brief_info.goal,
-  description: team.description
+  description: team.description,
+  team_skills: []
 })
 
 watch(
@@ -528,9 +557,17 @@ watch(
   (newVal) => {
     cur_team_info.team_id = newVal.team_brief_info.team_id
     cur_team_info.contest_id = newVal.team_brief_info.contest_id
-    ;(cur_team_info.title = newVal.team_brief_info.title),
-      (cur_team_info.goal = newVal.team_brief_info.goal),
-      (cur_team_info.description = newVal.description)
+    cur_team_info.title = newVal.team_brief_info.title
+    cur_team_info.goal = newVal.team_brief_info.goal
+    cur_team_info.description = newVal.description
+    // 更新 team_skills
+    if (newVal.team_skills) {
+      cur_team_info.team_skills = newVal.team_skills.map((skill) => ({
+        job: skill.job,
+        category: skill.category,
+        skill: skill.skill
+      }))
+    }
   },
   { immediate: true, deep: true }
 )
@@ -679,6 +716,20 @@ $(document).ready(function () {
   $('#dialog_apply').on('cancel', function (event) {
     event.preventDefault() // 阻止对话框关闭
   })
+})
+
+// 添加按岗位分组技能的计算属性
+const groupSkillsByJob = computed(() => {
+  const grouped = {}
+  if (team.team_skills) {
+    team.team_skills.forEach((skill) => {
+      if (!grouped[skill.job]) {
+        grouped[skill.job] = []
+      }
+      grouped[skill.job].push(skill)
+    })
+  }
+  return grouped
 })
 </script>
   
