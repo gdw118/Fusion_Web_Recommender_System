@@ -162,7 +162,7 @@
         </div>
 
         <p class="text-sm text-gray-500 mt-12 text-center">
-          &copy; 2023 SHNU CoderSky - All Rights Reserved.
+          &copy; 2025 SHNU CoderSky - All Rights Reserved.
         </p>
       </div>
     </div>

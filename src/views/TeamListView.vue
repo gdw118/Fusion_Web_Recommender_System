@@ -459,11 +459,13 @@ const getTeamList = () => {
     },
     success: function (resp) {
       if (resp.status_code === 0) {
+        console.log('Team list response:', resp)
         totalPage.value = Math.ceil(resp.total / limit)
         if (totalPage.value == 0) {
           totalPage.value = 1
         }
         const fetched_teams = resp.team_list.map((item) => {
+          console.log('Team item:', item)
           return {
             team_id: item.team_id,
             contest_id: item.contest_id,

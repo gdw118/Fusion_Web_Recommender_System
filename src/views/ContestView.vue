@@ -144,7 +144,7 @@
                 v-if="contest.contest_core_info.additional_info"
               >
                 <dt class="font-medium text-gray-900">补充信息</dt>
-                <dd class="text-gray-700 col-span-2 text-start indent-8">
+                <dd class="text-gray-700 col-span-2 text-center">
                   {{ contest.contest_core_info.additional_info }}
                 </dd>
               </div>
