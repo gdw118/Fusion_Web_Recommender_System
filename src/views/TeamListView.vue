@@ -452,7 +452,8 @@ const getTeamList = () => {
     type: 'GET',
     data: {
       limit: limit,
-      offset: (currentPage.value - 1) * limit
+      offset: (currentPage.value - 1) * limit,
+      user_id: store.state.user.user_info.user_id
     },
     headers: {
       Authorization: `Bearer ${store.state.user.token}`

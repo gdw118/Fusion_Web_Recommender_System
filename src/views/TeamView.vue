@@ -32,7 +32,7 @@
           <div v-else-if="role == 2" class="flex gap-4">
             <!-- 已收到的申请 -->
             <button
-              class="flex justify-end text-lg font-semibold text-blue-700 hover:text-blue-500 transition-transform transform active:scale-90"
+              class="flex justify-end text-lg font-semibold text-indigo-600 hover:text-indigo-500 transition-all duration-200 hover:bg-white/50 px-4 py-2 rounded-lg"
               onclick="dialog_manage_apply.showModal()"
               @click="get_team_application_list"
             >
@@ -41,7 +41,7 @@
             <!-- 修改队伍信息 -->
             <button
               v-if="cur_team_info.team_id != 0"
-              class="flex justify-end text-lg font-semibold text-blue-700 hover:text-blue-500 transition-transform transform active:scale-90"
+              class="flex justify-end text-lg font-semibold text-indigo-600 hover:text-indigo-500 transition-all duration-200 hover:bg-white/50 px-4 py-2 rounded-lg"
               @click="what_page = 1"
             >
               修改队伍信息
@@ -374,33 +374,43 @@
       <!-- Right Side 0 - team info-->
       <div
         v-if="what_page == 0"
-        class="flex flex-col w-1/2 bg-white p-5 rounded shadow-lg sm:overflow-y-scroll sm:h-[85vh]"
+        class="flex flex-col w-1/2 bg-white/30 backdrop-blur-md p-8 rounded-xl shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 sm:overflow-y-scroll sm:h-[85vh]"
         style="min-width: 700px"
       >
-        <div class="border-b pb-3 mb-2">
-          <div class="text-xl font-bold mt-4 ml-6">
+        <div class="backdrop-blur-sm bg-white/50 rounded-xl p-6 shadow-sm mb-6">
+          <div class="text-2xl font-bold text-gray-800 mb-6">
             {{ team.team_brief_info.title }}
           </div>
-          <div class="text-lg font-semibold mt-5 ml-6 flex items-center">
-            <img src="../assets/img/goal.svg" alt="goal" class="h-7 w-7 mr-3" />
+          <div class="text-xl font-semibold text-gray-700 flex items-center mb-6">
+            <img src="../assets/img/goal.svg" alt="goal" class="h-6 w-6 mr-3 text-indigo-500" />
             <span>目标：{{ team.team_brief_info.goal }}</span>
           </div>
           <!-- 技能需求 -->
           <div
             v-if="team.team_skills && team.team_skills.length > 0"
-            class="text-lg font-semibold mt-5 ml-6"
+            class="text-xl font-semibold text-gray-700"
           >
-            <div class="flex items-center mb-3">
-              <img src="../assets/img/honor.svg" alt="skills" class="h-7 w-7 mr-3" />
-              <span>技能需求：</span>
+            <div class="flex items-center mb-6">
+              <img
+                src="../assets/img/honor.svg"
+                alt="skills"
+                class="h-6 w-6 mr-3 text-indigo-500"
+              />
+              <span>技能需求</span>
             </div>
-            <div class="ml-10 space-y-4">
+            <div class="ml-10 space-y-8">
               <!-- 按岗位分组显示技能 -->
-              <div v-for="(skills, job) in groupSkillsByJob" :key="job" class="space-y-2">
-                <div class="font-medium text-indigo-600">{{ job }}</div>
-                <div class="flex flex-wrap gap-2">
+              <div v-for="(skills, job) in groupSkillsByJob" :key="job" class="space-y-4">
+                <div class="flex items-center">
+                  <div class="text-xl font-bold text-indigo-600 border-b-2 border-indigo-200 pb-1">
+                    {{ job }}
+                  </div>
+                </div>
+                <div class="flex flex-wrap gap-3">
                   <div v-for="skill in skills" :key="skill.skill" class="flex items-center">
-                    <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">
+                    <span
+                      class="px-4 py-1.5 bg-white/50 rounded-lg text-sm text-gray-700 border border-gray-200 hover:bg-white/70 transition-colors duration-200"
+                    >
                       {{ skill.skill }}
                     </span>
                   </div>
@@ -409,27 +419,32 @@
             </div>
           </div>
         </div>
-        <div class="px-6 max-w-[700px]">
-          <span class="rich-text" v-html="team.description"></span>
+        <div class="backdrop-blur-sm bg-white/50 rounded-xl p-6 shadow-sm">
+          <div class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+            <img src="../assets/img/note.svg" alt="note" class="h-5 w-5 mr-2 text-indigo-500" />
+            队伍详细介绍
+          </div>
+          <div class="px-4 max-w-[700px] text-gray-600 leading-relaxed">
+            <span class="rich-text" v-html="team.description"></span>
+          </div>
         </div>
       </div>
 
       <!-- Right Side 1 - modify team-->
       <div
         v-else-if="what_page == 1"
-        class="flex flex-col w-1/2 bg-white p-4 rounded shadow-lg sm:h-[85vh]"
+        class="flex flex-col w-1/2 bg-white/30 backdrop-blur-md p-8 rounded-xl shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 sm:h-[85vh]"
         style="min-width: 700px"
       >
         <!-- 取消 -->
-        <div class="flex items-center justify-end mt-1 mb-3 mr-2 pb-0 h-10">
-          <div class="mb-3 mt-3 ml-0 flex">
+        <div class="flex items-center justify-end mb-6">
+          <div class="flex">
             <!-- 取消按钮 -->
             <div
               @click="what_page = 0"
-              class="flex items-center hover:cursor-pointer transition-transform transform active:scale-90"
+              class="flex items-center hover:cursor-pointer text-lg font-semibold text-indigo-600 hover:text-indigo-500 transition-all duration-200 hover:bg-white/50 px-4 py-2 rounded-lg"
             >
-              <img src="../assets/img/cancel.svg" class="h-6 w-6 mr-2" />
-              <span class="text-lg font-bold">取消</span>
+              取消
             </div>
           </div>
         </div>

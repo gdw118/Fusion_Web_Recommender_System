@@ -1,24 +1,35 @@
 <template>
   <form @submit.prevent="submitTeamCreate">
-    <div class="space-y-8 px-2">
+    <div class="space-y-10 px-4">
       <!-- Top -->
-      <div>
-        <div class="border-b pb-2">
-          <span class="text-2xl font-semibold leading-7 text-gray-900">填写队伍信息</span>
-          <p class="mt-2 text-sm leading-6 text-gray-600">
-            您创建的队伍将会在赛事板块中展示，创建成功后您可以随时修改队伍信息
-          </p>
+      <div class="bg-white/30 backdrop-blur-sm rounded-xl p-6 border border-white/20 shadow-sm">
+        <div class="flex items-center mb-6">
+          <svg class="w-7 h-7 text-indigo-500 mr-3" viewBox="0 0 20 20" fill="currentColor">
+            <path
+              fill-rule="evenodd"
+              d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 110-12 6 6 0 010 12zm-1-5a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1zm0-4a1 1 0 011-1h2a1 1 0 110 2h-2a1 1 0 01-1-1z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <span class="text-2xl font-semibold text-gray-900">填写队伍信息</span>
         </div>
+        <p class="text-sm text-gray-600 mb-8">
+          您创建的队伍将会在赛事板块中展示，创建成功后您可以随时修改队伍信息
+        </p>
 
-        <div class="mt-4 grid gap-x-6 gap-y-5 grid-cols-6">
+        <div class="mt-6 grid gap-x-8 gap-y-6 grid-cols-6">
           <!-- 标题 -->
           <div class="col-span-full">
             <div class="flex items-center">
-              <img src="../assets/img/idea.svg" alt="title" class="h-5 w-5 mr-1" />
-              <div for="username" class="block text-base font-medium leading-6 text-gray-900">
-                队伍标题
+              <div class="flex items-center shrink-0">
+                <img src="../assets/img/idea.svg" alt="title" class="h-6 w-6 mr-2" />
+                <div for="username" class="block text-lg font-bold leading-6 text-gray-900">
+                  队伍标题
+                </div>
               </div>
-              <div class="flex ml-3 bg-yellow-200 items-center px-2 py-0 rounded">
+              <div
+                class="flex ml-3 bg-yellow-100/80 items-center px-3 py-1 rounded-lg backdrop-blur-sm overflow-hidden"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="stroke-current shrink-0 h-4 w-4 mr-2"
@@ -32,19 +43,19 @@
                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                   />
                 </svg>
-                <span class="text-sm"
+                <span class="text-sm text-gray-700 whitespace-nowrap"
                   >标题格式建议：[目标角色 + 数量] / [目标角色 + 数量] / [目标角色 +
                   数量]......</span
                 >
               </div>
             </div>
-            <div class="mt-2">
+            <div class="mt-3">
               <input
                 type="text"
                 name="team-title"
                 v-model="team_title"
                 id="team-title"
-                class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
+                class="block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300/50 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600/50 bg-white/50 backdrop-blur-sm text-sm leading-6 transition-all duration-200"
                 maxlength="50"
                 placeholder="例如：美术设计 1 名 / 程序员 2 名 / 策划 1 名"
               />
@@ -54,18 +65,16 @@
           <!-- 目标 -->
           <div class="col-span-full">
             <div class="flex items-center">
-              <img src="../assets/img/goal.svg" alt="goal" class="h-5 w-5 mr-1" />
-              <div for="username" class="block text-base font-medium leading-6 text-gray-900">
-                目标
-              </div>
+              <img src="../assets/img/goal.svg" alt="goal" class="h-6 w-6 mr-2" />
+              <div for="username" class="block text-lg font-bold leading-6 text-gray-900">目标</div>
             </div>
-            <div class="mt-2">
+            <div class="mt-3">
               <input
                 type="text"
                 name="team-goal"
                 id="team-goal"
                 v-model="team_goal"
-                class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
+                class="block w-full rounded-lg border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300/50 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600/50 bg-white/50 backdrop-blur-sm text-sm leading-6 transition-all duration-200"
                 maxlength="50"
                 placeholder="例如：冲击国赛金牌！"
               />
@@ -75,121 +84,190 @@
       </div>
 
       <!-- 技能需求 -->
-      <div>
-        <div class="flex items-center mb-4">
-          <img src="../assets/img/honor.svg" alt="skills" class="h-6 w-6 mr-2" />
-          <h2 class="text-base font-semibold leading-7 text-gray-900">技能需求</h2>
+      <div class="bg-white/30 backdrop-blur-sm rounded-xl p-6 border border-white/20 shadow-sm">
+        <div class="flex items-center mb-6">
+          <img src="../assets/img/honor.svg" alt="skills" class="h-7 w-7 mr-3" />
+          <h2 class="text-2xl font-semibold text-gray-900">技能需求</h2>
         </div>
-        <div class="space-y-6">
+        <p class="text-sm text-gray-600 mb-8">
+          请为每个岗位添加所需的技能要求，这将帮助其他用户更好地了解您的团队需求
+        </p>
+        <div class="mt-6 space-y-8">
           <!-- 岗位列表 -->
-          <div v-for="(job, jobIndex) in team_jobs" :key="jobIndex" class="border rounded-lg p-4">
-            <!-- 岗位标题 -->
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex items-center">
-                <input
-                  type="text"
-                  v-model="job.name"
-                  class="block w-48 h-9 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
-                  placeholder="岗位名称"
+          <div
+            v-for="(job, jobIndex) in team_jobs"
+            :key="jobIndex"
+            class="backdrop-blur-md bg-white/70 border border-white/30 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 relative"
+          >
+            <!-- 删除岗位按钮 -->
+            <button
+              type="button"
+              @click="remove_job(jobIndex)"
+              class="absolute top-3 right-3 p-1.5 rounded-lg bg-white/50 shadow-[4px_4px_8px_rgba(0,0,0,0.1),-4px_-4px_8px_rgba(255,255,255,0.8)] hover:shadow-[2px_2px_4px_rgba(0,0,0,0.1),-2px_-2px_4px_rgba(255,255,255,0.8)] active:shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.8)] text-gray-600 hover:text-red-600 transition-all duration-200"
+              title="删除岗位"
+            >
+              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fill-rule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
                 />
-                <button
-                  type="button"
-                  @click="remove_job(jobIndex)"
-                  class="ml-4 text-red-600 hover:text-red-800 transition-transform transform active:scale-90"
-                >
-                  删除岗位
-                </button>
+              </svg>
+            </button>
+            <!-- 岗位标题 -->
+            <div class="flex items-center mb-6">
+              <div class="flex items-center">
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-5 h-5 text-indigo-500" viewBox="0 0 20 20" fill="currentColor">
+                      <path
+                        d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v1h8v-1zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-1a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v1h-3zM4.75 12.094A5.973 5.973 0 004 15v1H1v-1a3 3 0 013.75-2.906z"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    type="text"
+                    v-model="job.name"
+                    class="block w-48 h-10 rounded-lg border-0 py-2 pl-10 pr-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300/50 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600/50 bg-white/50 backdrop-blur-sm sm:text-sm sm:leading-6 transition-all duration-200"
+                    placeholder="请输入岗位名称"
+                  />
+                </div>
               </div>
-              <button
-                type="button"
-                @click="add_skill_to_job(jobIndex)"
-                class="text-indigo-600 hover:text-indigo-800 transition-transform transform active:scale-90"
-              >
-                + 添加技能
-              </button>
             </div>
             <!-- 技能列表 -->
             <div class="space-y-4">
               <div
                 v-for="(skill, skillIndex) in job.skills"
                 :key="skillIndex"
-                class="grid grid-cols-12 gap-4"
+                class="grid grid-cols-12 gap-4 items-center"
               >
                 <div class="col-span-5">
-                  <select
-                    v-model="skill.category"
-                    @change="handle_category_change(jobIndex, skillIndex)"
-                    class="block w-full h-9 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
-                    :class="{ 'text-gray-400': !skill.category }"
-                  >
-                    <option value="" disabled selected hidden>选择分类</option>
-                    <option
-                      v-for="category in skill_categories"
-                      :key="category.value"
-                      :value="category.value"
+                  <div class="relative">
+                    <div
+                      class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
                     >
-                      {{ category.label }}
-                    </option>
-                  </select>
+                      <svg class="w-5 h-5 text-emerald-500" viewBox="0 0 20 20" fill="currentColor">
+                        <path
+                          fill-rule="evenodd"
+                          d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <select
+                      v-model="skill.category"
+                      @change="handle_category_change(jobIndex, skillIndex)"
+                      class="block w-full h-10 rounded-lg border-0 py-2 pl-10 pr-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300/50 focus:ring-2 focus:ring-inset focus:ring-indigo-600/50 bg-white/50 backdrop-blur-sm sm:text-sm sm:leading-6 transition-all duration-200"
+                      :class="{ 'text-gray-400': !skill.category }"
+                    >
+                      <option value="" disabled selected hidden>选择分类</option>
+                      <option
+                        v-for="category in skill_categories"
+                        :key="category.value"
+                        :value="category.value"
+                      >
+                        {{ category.label }}
+                      </option>
+                    </select>
+                  </div>
                 </div>
                 <div class="col-span-5">
-                  <select
-                    v-model="skill.skill"
-                    class="block w-full h-9 rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 text-sm leading-6"
-                    :class="{ 'text-gray-400': !skill.skill }"
-                    :disabled="!skill.category"
-                  >
-                    <option value="" disabled selected hidden>选择技能</option>
-                    <option
-                      v-for="skill_name in skill_names[skill.category] || []"
-                      :key="skill_name.value"
-                      :value="skill_name.value"
+                  <div class="relative">
+                    <div
+                      class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
                     >
-                      {{ skill_name.label }}
-                    </option>
-                  </select>
+                      <svg class="w-5 h-5 text-amber-500" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                        <path
+                          fill-rule="evenodd"
+                          d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <select
+                      v-model="skill.skill"
+                      class="block w-full h-10 rounded-lg border-0 py-2 pl-10 pr-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300/50 focus:ring-2 focus:ring-inset focus:ring-indigo-600/50 bg-white/50 backdrop-blur-sm sm:text-sm sm:leading-6 transition-all duration-200"
+                      :class="{ 'text-gray-400': !skill.skill }"
+                      :disabled="!skill.category"
+                    >
+                      <option value="" disabled selected hidden>选择技能</option>
+                      <option
+                        v-for="skill_name in skill_names[skill.category] || []"
+                        :key="skill_name.value"
+                        :value="skill_name.value"
+                      >
+                        {{ skill_name.label }}
+                      </option>
+                    </select>
+                  </div>
                 </div>
-                <div class="col-span-2 flex items-center">
+                <div class="col-span-2 flex items-center justify-end">
                   <button
                     type="button"
                     @click="remove_skill_from_job(jobIndex, skillIndex)"
-                    class="text-red-600 hover:text-red-800 transition-transform transform active:scale-90"
+                    class="p-1.5 rounded-lg bg-white/50 shadow-[4px_4px_8px_rgba(0,0,0,0.1),-4px_-4px_8px_rgba(255,255,255,0.8)] hover:shadow-[2px_2px_4px_rgba(0,0,0,0.1),-2px_-2px_4px_rgba(255,255,255,0.8)] active:shadow-[inset_2px_2px_4px_rgba(0,0,0,0.1),inset_-2px_-2px_4px_rgba(255,255,255,0.8)] text-gray-600 hover:text-gray-800 transition-all duration-200"
+                    title="删除技能"
                   >
-                    删除
+                    <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+                      <path
+                        fill-rule="evenodd"
+                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
                   </button>
                 </div>
               </div>
+              <!-- 添加技能按钮 -->
+              <button
+                type="button"
+                @click="add_skill_to_job(jobIndex)"
+                class="w-full px-3 py-2.5 rounded-lg border border-dashed border-gray-300 hover:border-indigo-400 text-gray-500 hover:text-indigo-600 transition-all duration-200 inline-flex items-center justify-center text-sm font-medium mt-2 bg-transparent hover:bg-indigo-50/50"
+              >
+                <svg class="w-4 h-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path
+                    d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                  />
+                </svg>
+                添加技能
+              </button>
             </div>
           </div>
           <button
             type="button"
             @click="add_job"
-            class="mt-2 text-indigo-600 hover:text-indigo-800 transition-transform transform active:scale-90"
+            class="w-full px-4 py-3.5 rounded-lg border border-dashed border-gray-300 hover:border-indigo-400 text-gray-500 hover:text-indigo-600 transition-all duration-200 inline-flex items-center justify-center text-sm font-medium bg-transparent hover:bg-indigo-50/50 backdrop-blur-sm"
           >
-            + 添加岗位
+            <svg class="w-4 h-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+              <path
+                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+              />
+            </svg>
+            添加岗位
           </button>
         </div>
       </div>
 
       <!-- Bottom -->
-      <div>
-        <div class="flex items-center mb-4">
-          <img src="../assets/img/note.svg" alt="description" class="h-6 w-6 mr-2" />
-          <h2 class="text-base font-semibold leading-7 text-gray-900">队伍详细介绍</h2>
+      <div class="bg-white/30 backdrop-blur-sm rounded-xl p-6 border border-white/20 shadow-sm">
+        <div class="flex items-center mb-6">
+          <img src="../assets/img/note.svg" alt="description" class="h-7 w-7 mr-3" />
+          <h2 class="text-2xl font-semibold text-gray-900">队伍详细介绍</h2>
         </div>
-        <!-- <p class="mt-1 mb-3 text-sm leading-6 text-gray-600">
-          Use a permanent address where you can receive mail.
-        </p> -->
+        <p class="text-sm text-gray-600 mb-8">
+          请详细描述您的队伍情况，包括队伍现状、项目背景、团队优势、期望的队友特点等，这将帮助其他用户更好地了解您的团队
+        </p>
 
         <RichText :description="description" @update-content="description_update" />
-        <div class="error-message mt-2 ml-1">{{ error_message }}</div>
+        <div class="error-message mt-3 ml-1">{{ error_message }}</div>
       </div>
     </div>
     <!-- Button -->
-    <div class="mt-3 flex items-center justify-end mr-2">
+    <div class="mt-6 flex items-center justify-end mr-2">
       <button
         type="submit"
-        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-transform transform active:scale-90"
+        class="rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all duration-200 transform hover:scale-105 active:scale-95"
       >
         提交
       </button>
